@@ -1,7 +1,7 @@
 #	Makefile for the galaxis game
 
 # Note: When the version changes, you also have to change the RPM spec file.
-VERS=1.4
+VERS=1.5
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
@@ -24,7 +24,7 @@ install: galaxis.6 uninstall
 	cp galaxis.6 /usr/share/man/man6/galaxis.6
 
 uninstall:
-	rm -f /usr/bin/install /usr/share/man/man6/galaxis.6
+	rm -f /usr/bin/galaxis /usr/share/man/man6/galaxis.6
 
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
