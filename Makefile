@@ -18,3 +18,7 @@ clean:
 
 shar:
 	shar READ.ME galaxis.c Makefile galaxis.6 >galaxis.shar
+
+tgz:
+	tar -cvf galaxis.tar READ.ME galaxis.c Makefile galaxis.6
+	gzip galaxis.tar
