@@ -1,7 +1,6 @@
 #	Makefile for the galaxis game
 
-# Note: When the version changes, you also have to change the RPM spec file.
-VERS=1.5
+VERS=1.6
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
@@ -43,6 +42,6 @@ dist: galaxis-$(VERS).tar.gz
 
 RPMROOT=/usr/src/redhat
 rpm: dist
-	rpmbuild -ta galaxis-$(VERS).tar.gz
+	rpmbuild --define 'myversion $(VERS)' -ta galaxis-$(VERS).tar.gz
 	cp $(RPMROOT)/RPMS/*/galaxis-$(VERS)*.rpm .
 	cp $(RPMROOT)/SRPMS/galaxis-$(VERS)*.src.rpm .
