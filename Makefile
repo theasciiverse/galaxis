@@ -16,9 +16,9 @@ galaxis: galaxis.c
 clean:
 	rm -f galaxis galaxis.shar *~
 
-shar:
+galaxis.shar:
 	shar READ.ME galaxis.c Makefile galaxis.6 >galaxis.shar
 
-tgz:
+galaxis.tar.gz:
 	tar -cvf galaxis.tar READ.ME galaxis.c Makefile galaxis.6
 	gzip galaxis.tar
