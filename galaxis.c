@@ -57,13 +57,13 @@ extern char *memset();
 #ifdef A_COLOR
 #define LIFEBOAT	('L' | COLOR_PAIR(COLOR_RED))
 #define UNKNOWN		('.' | COLOR_PAIR(COLOR_BLUE))
-#define MARKED		('M' | COLOR_PAIR(COLOR_GREEN))
+#define MARKED		('-' | COLOR_PAIR(COLOR_GREEN))
 #define BLANKED		('o' | COLOR_PAIR(COLOR_GREEN))
 #define HIDDEN		('X' | COLOR_PAIR(COLOR_MAGENTA))
 #else
 #define LIFEBOAT	'L'
 #define UNKNOWN		'.'
-#define MARKED		'M'
+#define MARKED		'-'
 #define BLANKED		'o'
 #define HIDDEN		'X'
 #endif /* A_COLOR */
