@@ -2,6 +2,7 @@
  * galaxis.c - a curses clone of the Macintosh game, Galaxis
  *
  * version 1.0 by Eric S. Raymond <esr@snark.thyrsus.com> Sun Oct 23 1994
+ * version 1.1 adds mouse support Wed Sep 20 1995
  */
 #define _POSIX_SOURCE
 
@@ -74,6 +75,8 @@ extern char *memset();
 #define PY(y)	(PYBASE + (y))
 #define PX(x)	(PXBASE + ((x+1)*3))
 #define pgoto(y, x)	(void)move(PY(y), PX(x))
+#define PXINV(x)	((((x) - PXBASE) / 3) - 1)
+#define PYINV(y)	((y) - PYBASE)
 
 /* other board locations */
 #define COLWIDTH	80
@@ -153,6 +156,11 @@ static void intro()
     init_pair(COLOR_BLUE, COLOR_BLUE, COLOR_BLACK);
     init_pair(COLOR_YELLOW, COLOR_YELLOW, COLOR_BLACK);
 #endif /* A_COLOR */
+
+#ifdef NCURSES_MOUSE_VERSION
+    (void) mousemask(BUTTON1_CLICKED | BUTTON1_DOUBLE_CLICKED,
+		     (mmask_t *)NULL);
+#endif /* NCURSES_MOUSE_VERSION */
 }		    
 
 /* VARARGS1 */
@@ -288,6 +296,13 @@ static void redisplay(bool force)
 #ifdef A_UNDERLINE
 	(void) mvaddstr(SYBASE+5, SXBASE, "Arrow keys work.");
 #endif /* A_UNDERLINE */
+#ifdef NCURSES_MOUSE_VERSION
+	if (tigetstr("Km"))
+	{
+	    (void) mvaddstr(SYBASE+6, PX(0), "Your mouse may work.  If so, double-click drops a probe");
+	    (void) mvaddstr(SYBASE+7, PX(0), "at the pointer and single-click toggles an empty mark.");
+	}
+#endif /* NCURSES_MOUSE_VERSION */
     }
  
     (void) mvprintw(POSYBASE + 1, 0, "Tries: %d", turn);
@@ -416,6 +431,31 @@ static int getcoord(void)
 #endif /* KEY_MIN */
 	    ny = cury+1;        nx = curx+1;
 	    break;
+#ifdef NCURSES_MOUSE_VERSION
+	case KEY_MOUSE:
+	    {
+		MEVENT	myevent;
+
+		getmouse(&myevent);
+
+		if (myevent.y >= PY(0) && myevent.y <= PY(BDEPTH)
+			&& myevent.x >= PX(0) && myevent.x <= PX(BWIDTH))
+		{
+		    nx = PXINV(myevent.x);
+		    ny = PYINV(myevent.y);
+		    if (myevent.bstate & BUTTON1_DOUBLE_CLICKED)
+			ungetch('p');
+		    else if (myevent.bstate & BUTTON1_CLICKED)
+			ungetch(' ');
+		}
+		else
+		{
+		    beep();
+		    continue;
+		}
+	    }
+	    break;
+#endif /* NCURSES_MOUSE_VERSION */
 	case 'r':
 	case FF:	/* undocumented */
 	    nx = curx; ny = cury;
