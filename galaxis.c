@@ -132,7 +132,9 @@ static void intro()
 
     (void) signal(SIGINT,outro);
     (void) signal(SIGINT,outro);
+#ifdef SIGIOT
     (void) signal(SIGIOT,outro);		/* for assert(3) */
+#endif /* SIGIOT */
     if(signal(SIGQUIT,SIG_IGN) != SIG_IGN)
 	(void)signal(SIGQUIT,outro);
 

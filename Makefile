@@ -1,6 +1,6 @@
 #	Makefile for the galaxis game
 
-VERS=1.6
+VERS=$(shell sed <galaxis.spec -n -e '/Version: \(.*\)/s//\1/p')
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
@@ -30,7 +30,7 @@ uninstall:
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
 
-SOURCES = READ.ME COPYING galaxis.c Makefile galaxis.xml galaxis.spec
+SOURCES = README COPYING galaxis.c Makefile galaxis.xml galaxis.spec
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	@ls $(SOURCES) galaxis.6 | sed s:^:galaxis-$(VERS)/: >MANIFEST
@@ -39,9 +39,3 @@ galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	@(cd ..; rm galaxis-$(VERS))
 
 dist: galaxis-$(VERS).tar.gz
-
-RPMROOT=/usr/src/redhat
-rpm: dist
-	rpmbuild --define 'myversion $(VERS)' -ta galaxis-$(VERS).tar.gz
-	cp $(RPMROOT)/RPMS/*/galaxis-$(VERS)*.rpm .
-	cp $(RPMROOT)/SRPMS/galaxis-$(VERS)*.src.rpm .
