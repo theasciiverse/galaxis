@@ -1,9 +1,8 @@
 #	Makefile for the galaxis game
 
 # Note: When the version changes, you also have to change
-#  * the name of the containing directory
-#  * the RPM spec file
-V=1.1
+# the RPM spec file and the LSM.
+VERS=1.2
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
@@ -19,18 +18,27 @@ galaxis: galaxis.c
 	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
 
 clean:
-	rm -f galaxis galaxis.shar *~
+	rm -f galaxis galaxis.shar galaxis-*.rpm galaxis-*.tar.gz *~
 
 SOURCES = READ.ME galaxis.c Makefile galaxis.6 galaxis.lsm galaxis.spec
 
-galaxis.shar:
-	shar $(SOURCES) >galaxis.shar
+galaxis-$(VERS).tar.gz: $(SOURCES)
+	@ls $(SOURCES) | sed s:^:galaxis-$(VERS)/: >MANIFEST
+	@(cd ..; ln -s galaxis galaxis-$(VERS))
+	(cd ..; tar -czvf galaxis/galaxis-$(VERS).tar.gz `cat galaxis/MANIFEST`)
+	@(cd ..; rm galaxis-$(VERS))
 
-galaxis.tar.gz:
-	(cd ..; tar -cvf galaxis-$(V)/galaxis.tar `echo $(SOURCES) | sed "/\(^\| \)/s// galaxis-$(V)\//g"`)
-	gzip -f galaxis.tar
+galaxis-$(VERS).shar:
+	shar $(SOURCES) >galaxis-$(VERS).shar
 
-rpm: galaxis.tar.gz
-	cp galaxis.tar.gz /usr/src/SOURCES/galaxis-$(V).tar.gz
-	cp galaxis.spec /usr/src/SPECS/galaxis-$(V)-1.spec
-	rpm -ba galaxis-$(V)-1.spec
+dist: galaxis-$(VERS).tar.gz
+
+RPMROOT=/usr/src/redhat
+RPM = rpm
+RPMFLAGS = -ba
+rpm: dist
+	cp galaxis-$(VERS).tar.gz $(RPMROOT)/SOURCES;
+	cp galaxis.spec $(RPMROOT)/SPECS
+	cd $(RPMROOT)/SPECS; $(RPM) $(RPMFLAGS) galaxis.spec	
+	cp $(RPMROOT)/RPMS/`arch|sed 's/i[4-9]86/i386/'`/galaxis-$(VERS)*.rpm .
+	cp $(RPMROOT)/SRPMS/galaxis-$(VERS)*.src.rpm .
