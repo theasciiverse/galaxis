@@ -550,7 +550,7 @@ static bool domove(void)
 
     case 'o':
 	dohilite = !dohilite;
-	redisplay(FALSE);
+	redisplay(TRUE);	/* TRUE avoids color loss when we toggle off */
 	break;
 
     case 'p':
