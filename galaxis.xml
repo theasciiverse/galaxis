@@ -1,27 +1,52 @@
-.TH GALAXIS 6 "Oct 23 1994"
-.SH NAME
-galaxis \- rescue lifeboats lost in interstellar space
-.SH SYNOPSIS
-galaxis
-.SH DESCRIPTION
-Lifeboats from a crippled interstellar liner are adrift in a starfield.  To
-find them, you can place probes that look in all eight compass directions and
-tell you how many lifeboats they see.  If you drop a probe directly on a
-lifeboat it will be revealed immediately.  Your objective: find the lifeboats
-as quickly as possible, before the stranded passengers run out of oxygen!
-.P
-This is a UNIX-hosted, curses-based clone of the nifty little Macintosh
+<!DOCTYPE refentry PUBLIC "-//OASIS//DTD DocBook V4.1//EN">
+<refentry id='galaxis.6'>
+<refmeta>
+<refentrytitle>galaxis</refentrytitle>
+<manvolnum>6</manvolnum>
+<refmiscinfo class='date'>Oct 23 1994</refmiscinfo>
+</refmeta>
+<refnamediv id='name'>
+<refname>galaxis</refname>
+<refpurpose>rescue lifeboats lost in interstellar space</refpurpose>
+</refnamediv>
+<refsynopsisdiv id='synopsis'>
+
+<cmdsynopsis>
+  <command>galaxis</command>
+</cmdsynopsis>
+
+</refsynopsisdiv>
+
+<refsect1 id='description'><title>DESCRIPTION</title>
+
+<para>Lifeboats from a crippled interstellar liner are adrift in a
+starfield.  To find them, you can place probes that look in all eight
+compass directions and tell you how many lifeboats they see.  If you
+drop a probe directly on a lifeboat it will be revealed immediately.
+Your objective: find the lifeboats as quickly as possible, before the
+stranded passengers run out of oxygen!</para>
+
+<para>This is a UNIX-hosted, curses-based clone of the nifty little Macintosh
 freeware game Galaxis.  It doesn't have the super-simple, point-and-click
 interface of the original, but compensates by automating away some of the
-game's simpler deductions.
-.P
-To run it, simply type `galaxis'.  The game screen includes a description
-of all commands, including `?' for detailed help.
-.SH AUTHORS
-The Macintosh game was designed and written by Christian Franz
-<cfranz@iiic.ethz.ch>.  This version was cloned by Eric S. Raymond
-<esr@snark.thyrsus.com>.  See ESR's home page at
-http://www.ccil.org/~esr/home.html for updates and other resources.
-.SH BUGS
-This really ought to be an X game, but that would have been too much
-like work.
+game's simpler deductions.</para>
+
+<para>To run it, simply type `galaxis'.  The game screen includes a description
+of all commands, including `?' for detailed help.</para>
+</refsect1>
+
+<refsect1 id='authors'><title>AUTHORS</title>
+<para>The Macintosh game was designed and written by Christian Franz
+&lt;cfranz@iiic.ethz.ch&gt;.  This version was cloned by Eric
+S. Raymond &lt;esr@snark.thyrsus.com&gt;.  See ESR's home page at
+<ulink
+url='http://www.ccil.org/'>http://www.ccil.org/</ulink>~esr/home.html
+for updates and other resources.</para>
+</refsect1>
+
+<refsect1 id='bugs'><title>BUGS</title>
+<para>This really ought to be an X game, but that would have been too much
+like work.</para>
+</refsect1>
+</refentry>
+
