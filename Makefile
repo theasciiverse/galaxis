@@ -1,7 +1,6 @@
 #	Makefile for the galaxis game
 
-# Note: When the version changes, you also have to change
-# the RPM spec file and the LSM.
+# Note: When the version changes, you also have to change the RPM spec file.
 VERS=1.4
 
 # Flags for use with the Linux ncurses package (recommended)
@@ -30,7 +29,7 @@ uninstall:
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
 
-SOURCES = READ.ME COPYING galaxis.c Makefile galaxis.xml galaxis.lsm galaxis.spec
+SOURCES = READ.ME COPYING galaxis.c Makefile galaxis.xml galaxis.spec
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	@ls $(SOURCES) galaxis.6 | sed s:^:galaxis-$(VERS)/: >MANIFEST
