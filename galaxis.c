@@ -205,7 +205,7 @@ static void initgame()
 	}	
     }
 
-    turn = 0;
+    turn = boatsfound = 0;
     revealed = FALSE;
     dohilite = TRUE;
 }
@@ -220,12 +220,12 @@ static int show(int i, int j)
 	return(hilite | LIFEBOAT);
     else if (revealed && (state & S_LIFEBOAT))
 	return(hilite | HIDDEN);
-    else if ((state & S_MARKED))
-	return(hilite | MARKED);
     else if ((state & S_BLANKED))
 	return(hilite | BLANKED);
     else if ((state & S_PROBED))
 	return(hilite | ('0' + probes[i][j]));
+    else if ((state & S_MARKED))
+	return(hilite | MARKED);
     else
 	return(hilite | UNKNOWN);
 }
@@ -583,11 +583,8 @@ static bool allmarked(void)
     return(FALSE);
 }
 
-static int sgetc(s)
-/* get a character, restricted to a string */
-char *s;
+static int confirm(void)
 {
-    char *s1;
     int ch;
 
     (void)refresh();
@@ -598,13 +595,11 @@ char *s;
 	    ch = toupper(ch);
 	if (ch == CTRLC)
 	    outro();
-	for (s1=s; *s1 && ch != *s1; ++s1)
-	    continue;
-	if (*s1)
+	if (ch == 'N' || ch == 'Y')
 	{
 	    (void) addch((chtype)ch);
 	    (void)refresh();
-	    return(ch);
+	    return(ch == 'Y');
 	}
     }
 }
@@ -624,7 +619,7 @@ char *argv[];
 	redisplay(FALSE);	/* force found count to be updated */
 	prompt("Want to play again [yn]? ");
     } while
-	(toupper(sgetc("YN")) == 'Y');
+	(confirm());
     outro();
     /*NOTREACHED*/
 }
