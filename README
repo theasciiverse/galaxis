@@ -16,7 +16,7 @@ galaxis.6	-- a trivial man page
 galaxis.xml	-- XML-Docbook master for the man page
 
 Send bug reports to esr@snark.thyrsus.com.  Also, see my WWW home page
-at http://www.tuxedo.org/~esr/index.html for updates and other resources.
+at http://www.catb.org/~esr/index.html for updates and other resources.
 
 Version 1.5: Tue Mar  4 08:51:25 EST 2003
 	* Fixed broken uninstall production.
