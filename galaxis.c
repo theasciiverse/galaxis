@@ -7,7 +7,7 @@
 
 #include <stdio.h>
 #include <termios.h>
-#include <ncurses.h>	/* change this to curses.h if you don't have ncurses */
+#include <curses.h>
 #include <signal.h>
 #include <ctype.h>
 #include <assert.h>
@@ -624,7 +624,7 @@ char *argv[];
 	redisplay(FALSE);	/* force found count to be updated */
 	prompt("Want to play again [yn]? ");
     } while
-	(sgetc("YN") == 'Y');
+	(toupper(sgetc("YN")) == 'Y');
     outro();
     /*NOTREACHED*/
 }
