@@ -2,7 +2,7 @@
 
 # Note: When the version changes, you also have to change
 # the RPM spec file and the LSM.
-VERS=1.2
+VERS=1.3
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib

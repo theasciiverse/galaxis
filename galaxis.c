@@ -3,6 +3,7 @@
  *
  * version 1.0 by Eric S. Raymond <esr@snark.thyrsus.com> Sun Oct 23 1994
  * version 1.1 adds mouse support Wed Sep 20 1995
+ * version 1.2 corrects buggy handling of multiple reprobes Sat Apr 20 2002
  */
 #define _POSIX_SOURCE
 
@@ -538,18 +539,18 @@ static void auto_mark(cury, curx)
 static void drop_probe(int cury, int curx)
 /* drop a probe on the given spot */
 {
-    if (board[cury][curx] & S_LIFEBOAT)
+    if (board[cury][curx] & S_BOATSEEN)
+    {
+	prompt("This lifeboat is already visible.");
+	beep();
+    }
+    else if (board[cury][curx] & S_LIFEBOAT)
     {
 	board[cury][curx] |= S_BOATSEEN;
 	prompt("You found a lifeboat!");
 	beep();
 	turn++;
 	boatsfound++;
-    }
-    else if (board[cury][curx] & S_BOATSEEN)
-    {
-	prompt("This lifeboat is already visible.");
-	beep();
     }
     else
     {
