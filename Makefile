@@ -20,10 +20,10 @@ galaxis.6: galaxis.xml
 	xmlto man galaxis.xml
 
 install: galaxis.6 uninstall
-	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/local/bin/
-	install -m 755 -o 0 -g 0 galaxis $(ROOT)/usr/local/bin/galaxis
-	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/local/man/man6/
-	install -m 755 -o 0 -g 0 galaxis.6 $(ROOT)/usr/local/man/man1/galaxis.6
+	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/bin/
+	install -m 755 -o 0 -g 0 galaxis $(ROOT)/usr/bin/galaxis
+	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/share/man/man6/
+	install -m 755 -o 0 -g 0 galaxis.6 $(ROOT)/usr/share/man/man6/galaxis.6
 
 uninstall:
 	rm -f ${ROOT}/usr/bin/galaxis ${ROOT}/usr/share/man/man6/galaxis.6
