@@ -30,7 +30,7 @@ uninstall:
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
 
-SOURCES = READ.ME galaxis.c Makefile galaxis.xml galaxis.lsm galaxis.spec
+SOURCES = READ.ME COPYING galaxis.c Makefile galaxis.xml galaxis.lsm galaxis.spec
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	@ls $(SOURCES) galaxis.6 | sed s:^:galaxis-$(VERS)/: >MANIFEST
