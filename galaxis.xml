@@ -21,7 +21,7 @@ of all commands, including `?' for detailed help.
 The Macintosh game was designed and written by Christian Franz
 <cfranz@iiic.ethz.ch>.  This version was cloned by Eric S. Raymond
 <esr@snark.thyrsus.com>.  See ESR's home page at
-http://www.thyrsus.com/~esr/home.html for updates and other resources.
+http://www.ccil.org/~esr/home.html for updates and other resources.
 .SH BUGS
 This really ought to be an X game, but that would have been too much
 like work.
