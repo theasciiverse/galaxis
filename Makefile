@@ -2,7 +2,7 @@
 
 # Note: When the version changes, you also have to change
 # the RPM spec file and the LSM.
-VERS=1.3
+VERS=1.4
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
@@ -17,19 +17,26 @@ CC = gcc
 galaxis: galaxis.c
 	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
 
-clean:
-	rm -f galaxis galaxis.shar galaxis-*.rpm galaxis-*.tar.gz *~
+galaxis.6: galaxis.sgml
+	docbook2man galaxis.sgml
 
-SOURCES = READ.ME galaxis.c Makefile galaxis.6 galaxis.lsm galaxis.spec
+install: galaxis.6 uninstall
+	cp galaxis /usr/bin
+	cp galaxis.6 /usr/share/man/man6/galaxis.6
+
+uninstall:
+	rm -f /usr/bin/install /usr/share/man/man6/install.6
+
+clean:
+	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
+
+SOURCES = READ.ME galaxis.c Makefile galaxis.sgml galaxis.lsm galaxis.spec
 
 galaxis-$(VERS).tar.gz: $(SOURCES)
 	@ls $(SOURCES) | sed s:^:galaxis-$(VERS)/: >MANIFEST
 	@(cd ..; ln -s galaxis galaxis-$(VERS))
 	(cd ..; tar -czvf galaxis/galaxis-$(VERS).tar.gz `cat galaxis/MANIFEST`)
 	@(cd ..; rm galaxis-$(VERS))
-
-galaxis-$(VERS).shar:
-	shar $(SOURCES) >galaxis-$(VERS).shar
 
 dist: galaxis-$(VERS).tar.gz
 
