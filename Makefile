@@ -25,7 +25,7 @@ install: galaxis.6 uninstall
 	cp galaxis.6 /usr/share/man/man6/galaxis.6
 
 uninstall:
-	rm -f /usr/bin/install /usr/share/man/man6/install.6
+	rm -f /usr/bin/install /usr/share/man/man6/galaxis.6
 
 clean:
 	rm -f galaxis galaxis-*.rpm galaxis-*.tar.gz *~
