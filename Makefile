@@ -40,9 +40,7 @@ galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 dist: galaxis-$(VERS).tar.gz
 
 RPMROOT=/usr/src/redhat
-RPM = rpmbuild
-RPMFLAGS = -ta
 rpm: dist
 	rpmbuild -ta galaxis-$(VERS).tar.gz
-	cp $(RPMROOT)/RPMS/`arch|sed 's/i[4-9]86/i386/'`/galaxis-$(VERS)*.rpm .
+	cp $(RPMROOT)/RPMS/*/galaxis-$(VERS)*.rpm .
 	cp $(RPMROOT)/SRPMS/galaxis-$(VERS)*.src.rpm .
