@@ -28,7 +28,8 @@ uninstall:
 	rm -f /usr/bin/install /usr/share/man/man6/install.6
 
 clean:
-	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
+	rm -f galaxis galaxis-*.rpm galaxis-*.tar.gz *~
+	rm -f galaxis.6 manpage.links manpage.refs
 
 SOURCES = READ.ME galaxis.c Makefile galaxis.sgml galaxis.lsm galaxis.spec
 
