@@ -4,8 +4,7 @@
 This directory contains the source for a UNIX-hosted, curses-based clone of the
 nifty little Macintosh freeware game Galaxis.  The code is POSIX-conforming and
 was written under Linux using the ncurses library; it should part readily to
-any System V.  BSD sites using the inferior native BSD curses will lose some
-features (no color, nor arrow-key support).
+any modern Unix.
 
 Files in this distribution:
 
