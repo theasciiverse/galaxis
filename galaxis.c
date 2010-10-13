@@ -13,6 +13,8 @@
 #include <signal.h>
 #include <ctype.h>
 #include <assert.h>
+#include <string.h>
+#include <stdlib.h>
 
 #ifndef A_UNDERLINE	/* BSD curses */
 #define	beep()	write(1,"\007",1);
@@ -29,7 +31,6 @@
 extern long lrand48();
 extern void srand48();
 #define bzero(s, n)	(void)memset((char *)(s), '\0', n)
-extern char *memset();
 /*
  * Try this if ungetch() fails to resolve.
  *
@@ -113,9 +114,8 @@ static bool dohilite;			/* highlight those rays */
 
 #define	PR	(void)addstr
 
-static void outro(sig)
+static void outro(int sig)
 /* end the game, either normally or due to signal */
-int	sig;
 {
     clear();
     (void)refresh();
@@ -125,7 +125,7 @@ int	sig;
     exit(0);
 }
 
-static void intro()
+static void intro(void)
 /* initialize curses */
 {
     srand(time(0L)+getpid());	/* Kick the random number generator */
@@ -167,9 +167,8 @@ static void intro()
 }		    
 
 /* VARARGS1 */
-static void prompt(f, s)
+static void prompt(char *f, char *s)
 /* print a message at the prompt line */
-char *f, *s;
 {
     (void) move(PROMPTLINE, 0);
     (void) clrtoeol();
@@ -177,8 +176,7 @@ char *f, *s;
     (void) refresh();
 }
 
-static void error(s)
-char *s;
+static void error(char *s)
 {
     (void) move(PROMPTLINE + 2, 0);
     (void) clrtoeol();
@@ -189,13 +187,12 @@ char *s;
     }
 }
 
-static int rnd(n)
-int n;
+static int rnd(int n)
 {
     return(((rand() & 0x7FFF) % n));
 }
 
-static void initgame()
+static void initgame(void)
 {
     int boatsplaced;
 
@@ -322,7 +319,7 @@ static void redisplay(bool force)
     refresh();
 }
 
-static void help()
+static void help(void)
 {
     clear();
 
@@ -366,7 +363,7 @@ static void help()
     (void) printw(
 	    "Yes, this should have an X interface more like the Mac game.  So write one!");
 
-    prompt("Press any key to continue...");
+    prompt("Press any key to continue...", "");
     getch();
     redisplay(TRUE);
 }
@@ -543,13 +540,13 @@ static void drop_probe(int cury, int curx)
 {
     if (board[cury][curx] & S_BOATSEEN)
     {
-	prompt("This lifeboat is already visible.");
+	prompt("This lifeboat is already visible.", "");
 	beep();
     }
     else if (board[cury][curx] & S_LIFEBOAT)
     {
 	board[cury][curx] |= S_BOATSEEN;
-	prompt("You found a lifeboat!");
+	prompt("You found a lifeboat!", "");
 	beep();
 	turn++;
 	boatsfound++;
@@ -567,7 +564,7 @@ static void drop_probe(int cury, int curx)
 	    turn++;
 	}
 	else
-	    prompt("You have already probed this location.");
+	    prompt("You have already probed this location.", "");
 
 	/* auto-mark all rays when all lifeboats on them are visible */
 	if (probes[cury][curx] == visibles)
@@ -606,7 +603,7 @@ static bool domove(void)
 	return(FALSE);
 
     default:
-	prompt("Sorry, I don't recognize that commamd.");
+	prompt("Sorry, I don't recognize that command.", "");
 	break;
     }
 
@@ -637,7 +634,7 @@ static int confirm(void)
 	if (islower(ch))
 	    ch = toupper(ch);
 	if (ch == CTRLC)
-	    outro();
+	    outro(0);
 	if (ch == 'N' || ch == 'Y')
 	{
 	    (void) addch((chtype)ch);
@@ -660,10 +657,10 @@ char *argv[];
 	    continue;
 
 	redisplay(FALSE);	/* force found count to be updated */
-	prompt("Want to play again [yn]? ");
+	prompt("Want to play again [yn]? ", "");
     } while
 	(confirm());
-    outro();
+    outro(0);
     /*NOTREACHED*/
 }
 
