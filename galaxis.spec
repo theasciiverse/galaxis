@@ -3,7 +3,7 @@ Version: 1.8
 Release: 1
 URL: http://www.catb.org/~esr/galaxis/
 Source0: %{name}-%{version}.tar.gz
-License: GPL
+License: BSD
 Group: Games
 Summary: Galaxis (screen mode)
 BuildRoot: %{_tmppath}/%{name}-root
