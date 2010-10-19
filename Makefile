@@ -17,6 +17,8 @@ galaxis: galaxis.c
 
 galaxis.6: galaxis.xml
 	xmlto man galaxis.xml
+galaxis.html: galaxis.xml
+	xmlto html-nochunks galaxis.xml
 
 install: galaxis.6 uninstall
 	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/bin/
