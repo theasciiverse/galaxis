@@ -35,7 +35,7 @@ cp galaxis.6 "$RPM_BUILD_ROOT"%{_mandir}/man6/
 %{_bindir}/galaxis
 
 %changelog
-* Wed Oct 18 2006 Eric S. Raymond <esr@snark.thyrsus.com> - 1.8-1
+* Wed Oct 13 2010 Eric S. Raymond <esr@snark.thyrsus.com> - 1.8-1
 - Full ANSIfication.  License changed to BSD.
 
 * Mon Dec 29 2003 Eric S. Raymond <esr@snark.thyrsus.com> 1.7

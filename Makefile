@@ -29,13 +29,17 @@ uninstall:
 
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~
+	rm -f SHIPPER.* *.html
 
 SOURCES = README COPYING galaxis.c Makefile galaxis.xml galaxis.spec
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	@ls $(SOURCES) galaxis.6 | sed s:^:galaxis-$(VERS)/: >MANIFEST
 	@(cd ..; ln -s galaxis galaxis-$(VERS))
-	(cd ..; tar -czvf galaxis/galaxis-$(VERS).tar.gz `cat galaxis/MANIFEST`)
+	(cd ..; tar -czf galaxis/galaxis-$(VERS).tar.gz `cat galaxis/MANIFEST`)
 	@(cd ..; rm galaxis-$(VERS))
 
 dist: galaxis-$(VERS).tar.gz
+
+release: galaxis-$(VERS).tar.gz galaxis.html
+	shipper -u -m -t; make clean
