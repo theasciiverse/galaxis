@@ -7,6 +7,7 @@ License: BSD
 Group: Games
 Summary: Galaxis (screen mode)
 BuildRoot: %{_tmppath}/%{name}-root
+#Destinations: freshmeat
 
 %description
 A UNIX-hosted, curses-based clone of the nifty little Macintosh
