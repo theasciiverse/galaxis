@@ -36,10 +36,7 @@ clean:
 SOURCES = README COPYING galaxis.c Makefile galaxis.xml galaxis.spec
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
-	@ls $(SOURCES) galaxis.6 | sed s:^:galaxis-$(VERS)/: >MANIFEST
-	@(cd ..; ln -s galaxis galaxis-$(VERS))
-	(cd ..; tar -czf galaxis/galaxis-$(VERS).tar.gz `cat galaxis/MANIFEST`)
-	@(cd ..; rm galaxis-$(VERS))
+	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz
 
 dist: galaxis-$(VERS).tar.gz
 
