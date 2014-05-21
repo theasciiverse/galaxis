@@ -15,6 +15,8 @@
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
+#include <time.h>
+#include <unistd.h>
 
 #ifndef A_UNDERLINE	/* BSD curses */
 #define	beep()	write(1,"\007",1);
@@ -644,7 +646,7 @@ static int confirm(void)
     }
 }
 
-main(argc, argv)
+int main(argc, argv)
 int argc;
 char *argv[];
 {
