@@ -1,5 +1,5 @@
 Name: galaxis
-Version: 1.8
+Version: 1.9
 Release: 1
 URL: http://www.catb.org/~esr/galaxis/
 Source0: %{name}-%{version}.tar.gz
@@ -36,7 +36,10 @@ cp galaxis.6 "$RPM_BUILD_ROOT"%{_mandir}/man6/
 %{_bindir}/galaxis
 
 %changelog
-* Tue Oct 18 2010 Eric S. Raymond <esr@snark.thyrsus.com> - 1.8-1
+* Tue Oct 18 2010 Eric S. Raymond <esr@snark.thyrsus.com> - 1.9
+- Add a desktop file.  Port fix from the BSD maintainer
+
+* Tue Oct 18 2010 Eric S. Raymond <esr@snark.thyrsus.com> - 1.8
 - Full ANSIfication.  License changed to BSD.
 
 * Mon Dec 29 2003 Eric S. Raymond <esr@snark.thyrsus.com> 1.7
