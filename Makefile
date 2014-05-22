@@ -32,7 +32,7 @@ uninstall:
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.tar.gz *~ *.html
 
-SOURCES = README COPYING NEWS control galaxis.c Makefile galaxis.xml galaxis.desktop
+SOURCES = README COPYING NEWS control galaxis.c Makefile galaxis.xml galaxis.desktop galaxis.png
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz $(SOURCES)
