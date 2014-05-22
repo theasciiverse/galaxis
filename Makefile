@@ -1,6 +1,6 @@
 #	Makefile for the galaxis game
 
-VERS=$(shell sed <galaxis.spec -n -e '/Version: \(.*\)/s//\1/p')
+VERS=1.9
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
@@ -35,7 +35,7 @@ clean:
 SOURCES = README COPYING NEWS control galaxis.c Makefile galaxis.xml galaxis.desktop galaxis.png
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
-	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz $(SOURCES)
+	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz $(SOURCES) galaxis.6
 
 dist: galaxis-$(VERS).tar.gz
 
