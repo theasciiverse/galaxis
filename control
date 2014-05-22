@@ -1,0 +1,21 @@
+# This is not a real Debian control file, though the syntax is compatible.
+# It's project metadata for the shipper tool
+
+Package: galaxis
+
+Description: Find the lost lifeboats from an interstellar liner.
+ A curses-based clone of the Macintosh freeware game Galaxis.
+
+#XBS-Gitorious-URL: https://gitorious.org/galaxis
+
+XBS-Destinations: freecode
+
+Homepage: http://www.catb.org/~esr/galaxis
+
+XBS-HTML-Target: index.html
+
+XBS-Logo: galaxis.png
+
+XBS-Freecode-Tags: game, card, solitaire
+
+XBS-VC-Tag-Template: %(version)s

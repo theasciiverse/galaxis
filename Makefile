@@ -30,9 +30,9 @@ uninstall:
 	rm -f ${ROOT}/usr/bin/galaxis ${ROOT}/usr/share/man/man6/galaxis.6
 
 clean:
-	rm -f galaxis galaxis.6 galaxis-*.rpm galaxis-*.tar.gz *~ *.html
+	rm -f galaxis galaxis.6 galaxis-*.tar.gz *~ *.html
 
-SOURCES = README COPYING galaxis.c Makefile galaxis.xml galaxis.spec galaxis.desktop
+SOURCES = README COPYING NEWS control galaxis.c Makefile galaxis.xml galaxis.desktop
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz $(SOURCES)
