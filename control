@@ -6,9 +6,11 @@ Package: galaxis
 Description: Find the lost lifeboats from an interstellar liner.
  A curses-based clone of the Macintosh freeware game Galaxis.
 
-#XBS-Gitorious-URL: https://gitorious.org/galaxis
+XBS-Repository-URL: http://thyrsus.com/gitweb/?p=galaxis.git
 
-XBS-Destinations: freecode
+XBS-Clone-From: git@thyrsus.com:galaxis
+
+#XBS-Destinations: freecode
 
 Homepage: http://www.catb.org/~esr/galaxis
 
