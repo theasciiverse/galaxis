@@ -32,6 +32,10 @@ uninstall:
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.tar.gz *~ *.html
 
+CPPCHECKOPTS =
+cppcheck:
+	cppcheck -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
+
 SOURCES = README COPYING NEWS control galaxis.c Makefile galaxis.xml galaxis.desktop galaxis.png
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
@@ -41,3 +45,6 @@ dist: galaxis-$(VERS).tar.gz
 
 release: galaxis-$(VERS).tar.gz galaxis.html
 	shipper version=$(VERS) | sh -e -x
+
+refresh: galaxis.html
+	shipper -N -w version=$(VERS) | sh -e -x
