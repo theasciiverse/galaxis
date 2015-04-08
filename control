@@ -6,18 +6,16 @@ Package: galaxis
 Description: Find the lost lifeboats from an interstellar liner.
  A curses-based clone of the Macintosh freeware game Galaxis.
 
-XBS-Repository-URL: http://thyrsus.com/gitweb/?p=galaxis.git
-
-XBS-Clone-From: git@thyrsus.com:galaxis
-
-#XBS-Destinations: freecode
-
 Homepage: http://www.catb.org/~esr/galaxis
 
 XBS-HTML-Target: index.html
 
+XBS-Repository-URL: http://thyrsus.com/gitweb/?p=galaxis.git
+
+#XBS-Destinations: freshcode
+
 XBS-Logo: galaxis.png
 
-XBS-Freecode-Tags: game, card, solitaire
+#XBS-Project-Tags: game, card, solitaire
 
 XBS-VC-Tag-Template: %(version)s
