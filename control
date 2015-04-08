@@ -12,6 +12,10 @@ XBS-HTML-Target: index.html
 
 XBS-Repository-URL: http://thyrsus.com/gitweb/?p=galaxis.git
 
+XBS-Developer-Clone: git@thyrsus.com:galaxis
+
+XBS-Anonymous-Clone: git://thyrsus.com/repositories/galaxis.git
+
 #XBS-Destinations: freshcode
 
 XBS-Logo: galaxis.png
