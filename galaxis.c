@@ -4,6 +4,8 @@
  * version 1.0 by Eric S. Raymond <esr@snark.thyrsus.com> Sun Oct 23 1994
  * version 1.1 adds mouse support Wed Sep 20 1995
  * version 1.2 corrects buggy handling of multiple reprobes Sat Apr 20 2002
+ *
+ * SPDX-License-Identifier: BSD-2-clause
  */
 #define _POSIX_SOURCE
 
