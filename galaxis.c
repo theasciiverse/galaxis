@@ -513,7 +513,7 @@ static void count_lifeboats(int cury, int curx, int *total, int *visible)
     *visible = vis;
 }
 
-static void auto_mark(cury, curx)
+static void auto_mark(int cury, int curx)
 /* automatically place marks on all rays */
 {
     int n;
