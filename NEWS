@@ -2,6 +2,8 @@
 
 Repository head:
    Fully converted to new shipper-based packaging.
+   C declaration cleanup.  Passes cppcheck auditing.
+   Project logo added.
 
 1.9: 2010-10-18 
    Add a desktop file.  Port fix from the BSD maintainer
