@@ -1,6 +1,6 @@
 #	Makefile for the galaxis game
 
-VERS=1.9
+VERS=1.10
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
