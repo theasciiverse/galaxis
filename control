@@ -10,11 +10,7 @@ Homepage: http://www.catb.org/~esr/galaxis
 
 XBS-HTML-Target: index.html
 
-XBS-Repository-URL: http://thyrsus.com/gitweb/?p=galaxis.git
-
-XBS-Developer-Clone: git@thyrsus.com:galaxis
-
-XBS-Anonymous-Clone: git://thyrsus.com/repositories/galaxis.git
+XBS-Repository-URL: https://gitlab.com/esr/galaxis
 
 #XBS-Destinations: freshcode
 

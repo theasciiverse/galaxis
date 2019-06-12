@@ -1,6 +1,7 @@
 		galaxis project news
 
 Repository head:
+   Rehosted on GitLab
    Fully converted to new shipper-based packaging.
    C declaration cleanup.  Passes cppcheck auditing.
    Project logo added.
