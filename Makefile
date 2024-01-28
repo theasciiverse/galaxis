@@ -32,6 +32,9 @@ uninstall:
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.tar.gz *~ *.html
 
+reflow:
+	@clang-format --style="{IndentWidth: 8, UseTab: ForIndentation}" -i $$(find . -name "*.[ch]")
+
 CPPCHECKOPTS =
 cppcheck:
 	cppcheck -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
