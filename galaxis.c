@@ -3,6 +3,7 @@
  *
  * by Eric S. Raymond <esr@snark.thyrsus.com>, begun Sun Oct 23 1994
  *
+ * SPDX-FileCopyrightText: (C) Eric S. Raymond <esr@thyrsus.com>
  * SPDX-License-Identifier: BSD-2-Clause
  */
 #define _POSIX_SOURCE
