@@ -15,10 +15,16 @@ CC = gcc
 galaxis: galaxis.c
 	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
 
-galaxis.6: galaxis.xml
-	xmlto man galaxis.xml
-galaxis.html: galaxis.xml
-	xmlto html-nochunks galaxis.xml
+# Note: to suppress the footers with timestamps being generated in HTML,
+# we use "-a nofooter".
+# To debug asciidoc problems, you may need to run "xmllint --nonet --noout --valid"
+# on the intermediate XML that throws an error.
+.SUFFIXES: .html .adoc .6
+
+.adoc.6:
+	asciidoctor -D. -a nofooter -b manpage $<
+.adoc.html:
+	asciidoctor -D. -a nofooter -a webfonts! $<
 
 install: galaxis.6 uninstall
 	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/bin/
@@ -39,7 +45,7 @@ CPPCHECKOPTS =
 cppcheck:
 	cppcheck -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
 
-SOURCES = README COPYING NEWS control galaxis.c Makefile galaxis.xml galaxis.desktop galaxis.png
+SOURCES = README.adoc COPYING NEWS.adoc control galaxis.c Makefile galaxis.adoc galaxis.desktop galaxis.png
 
 galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
 	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz $(SOURCES) galaxis.6

@@ -1,19 +1,9 @@
-			GALAXIS for UNIX
-	by Eric S. Raymond <esr@snark.thyrsus.com>, Sun Oct 23 1994
+= GALAXIS for UNIX
 
 This directory contains the source for a UNIX-hosted, curses-based clone of the
 nifty little Macintosh freeware game Galaxis.  The code is POSIX-conforming and
 was written under Linux using the ncurses library; it should part readily to
 any modern Unix.
-
-Files in this distribution:
-
-READ.ME		-- this file
-Makefile	-- how to make the game
-galaxis.c	-- the game itself
-galaxis.6	-- a trivial man page
-galaxis.xml	-- XML-Docbook master for the man page
-galaxis.spec	-- RPM spec file includes the detailed change log.
 
 Send bug reports to esr@snark.thyrsus.com.  Also, see my WWW home page
 at http://www.catb.org/~esr/index.html for updates and other resources.
