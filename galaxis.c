@@ -18,28 +18,6 @@
 #include <time.h>
 #include <unistd.h>
 
-#ifndef A_UNDERLINE /* BSD curses */
-#define beep() write(1, "\007", 1);
-#define cbreak crmode
-#define saveterm savetty
-#define resetterm resetty
-#define nocbreak nocrmode
-#define strchr index
-#endif /* !A_UNDERLINE */
-
-#ifdef isxdigit /* aha, must be an AT&T system... */
-#define srand(n) srand48(n)
-#define rand() lrand48()
-extern long lrand48();
-extern void srand48();
-#define bzero(s, n) (void)memset((char *)(s), '\0', n)
-/*
- * Try this if ungetch() fails to resolve.
- *
- * #define ungetch ungetc
- */
-#endif /* isxdigit */
-
 /* miscellaneous constants */
 #define CTRLC '\003' /* used as terminate command */
 #define FF '\014'    /* used as redraw command */
@@ -192,8 +170,8 @@ static int rnd(int n) { return (((rand() & 0x7FFF) % n)); }
 static void initgame(void) {
 	int boatsplaced;
 
-	bzero(board, sizeof(char) * BWIDTH * BDEPTH);
-	bzero(probes, sizeof(char) * BWIDTH * BDEPTH);
+	memset(board, '\0', sizeof(char) * BWIDTH * BDEPTH);
+	memset(probes, '\0', sizeof(char) * BWIDTH * BDEPTH);
 
 	/* first, place the lifeboats */
 	boatsplaced = 0;
