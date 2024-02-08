@@ -1,10 +1,10 @@
 = galaxis project news =
 
-Repository head::
+1.11: 2024-02-08::
    Clean up code to assume SUSv2
    Documentation moved to asciidoctor.
 
-10.0: 2019-06-12::
+1.10: 2019-06-12::
    Rehosted on GitLab
    Fully converted to new shipper-based packaging.
    C declaration cleanup.  Passes cppcheck auditing.
