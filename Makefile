@@ -1,16 +1,14 @@
 #	Makefile for the galaxis game
+#
+# SPDX-FileCopyrightText: (C) Eric S. Raymond <esr@thyrsus.com>
+# SPDX-License-Identifier: BSD-2-Clause
 
-VERS=1.10
+VERS=$(shell sed -n <NEWS.adoc '/^[0-9]/s/:.*//p' | head -1)
 
 # Flags for use with the Linux ncurses package (recommended)
-CFLAGS = -g -DNDEBUG  # -I/usr/local/include -L/usr/local/lib
+CFLAGS = -g -DNDEBUG
 TERMLIB = -lncurses
 CC = gcc
-
-# Flags for use with stock curses
-#CFLAGS = -DNDEBUG
-#TERMLIB = -lcurses
-#CC = gcc
 
 galaxis: galaxis.c
 	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
@@ -44,6 +42,9 @@ reflow:
 CPPCHECKOPTS =
 cppcheck:
 	cppcheck -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
+
+version:
+	@echo $(VERS)
 
 SOURCES = README.adoc COPYING NEWS.adoc control galaxis.c Makefile galaxis.adoc galaxis.desktop galaxis.png
 

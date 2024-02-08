@@ -1,5 +1,7 @@
 = galaxis(6) =
 :doctype: manpage
+// SPDX-FileCopyrightText: (C) Eric S. Raymond <esr@thyrsus.com>
+// SPDX-License-Identifier: BSD-2-Clause
 
 == NAME ==
 galaxis - rescue lifeboats lost in interstellar space
