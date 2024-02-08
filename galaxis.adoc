@@ -30,8 +30,7 @@ of all commands, including "?" for detailed help.
 The Macintosh game was designed and written by Christian Franz
 <cfranz@iiic.ethz.ch>.  This version was cloned by Eric S. Raymond
 <esr@snark.thyrsus.com>.  See ESR's home page at
-http://www.catb.org/~esr/'>http://www.catb.org/~esr/ for updates and
-other resources.
+http://www.catb.org/~esr/ for updates and other resources.
 
 
 [[bugs]]
