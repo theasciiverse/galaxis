@@ -606,7 +606,7 @@ static bool allmarked(void)
 			}
 		}
 	}
-	return (FALSE);
+	return yes;
 }
 
 static int confirm(void) {
