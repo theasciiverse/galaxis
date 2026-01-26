@@ -93,6 +93,7 @@ static int turn;       /* how many tries we've made */
 static int boatsfound; /* number of boats found */
 static bool revealed;  /* display hidden lifeboats */
 static bool dohilite;  /* highlight those rays */
+static volatile sig_atomic_t exit_requested;
 
 #define PR (void)addstr
 
@@ -107,18 +108,23 @@ static void outro(int sig)
 	exit(0);
 }
 
+static void request_exit(int sig)
+/* async-signal-safe exit request */
+{
+	exit_requested = sig;
+}
+
 static void intro(void)
 /* initialize curses */
 {
 	srand(time(0L) + getpid()); /* Kick the random number generator */
 
-	(void)signal(SIGINT, outro);
-	(void)signal(SIGINT, outro);
+	(void)signal(SIGINT, request_exit);
 #ifdef SIGIOT
-	(void)signal(SIGIOT, outro); /* for assert(3) */
+	(void)signal(SIGIOT, request_exit); /* for assert(3) */
 #endif                               /* SIGIOT */
 	if (signal(SIGQUIT, SIG_IGN) != SIG_IGN) {
-		(void)signal(SIGQUIT, outro);
+		(void)signal(SIGQUIT, request_exit);
 	}
 
 	(void)initscr();
@@ -275,7 +281,9 @@ static void redisplay(bool force) {
 		(void)mvaddstr(SYBASE + 5, SXBASE, "Arrow keys work.");
 #endif /* A_UNDERLINE */
 #ifdef NCURSES_MOUSE_VERSION
-		if (tigetstr("Km")) {
+		char *km = tigetstr("Km");
+
+		if (km != NULL && km != (char *)-1) {
 			(void)mvaddstr(SYBASE + 6, PX(0),
 			               "Your mouse may work.  If so, "
 			               "double-click drops a probe");
@@ -355,6 +363,10 @@ static int getcoord(void) {
 	int ny, nx, c;
 
 	for (;;) {
+		if (exit_requested) {
+			prompt("Signal received. Exiting.", "");
+			outro(exit_requested);
+		}
 		(void)mvprintw(POSYBASE, 0, "(%d, %c) ", curx, 'A' + cury);
 		pgoto(cury, curx);
 		curs_set(1);
@@ -430,7 +442,10 @@ static int getcoord(void) {
 		case KEY_MOUSE: {
 			MEVENT myevent;
 
-			getmouse(&myevent);
+			if (getmouse(&myevent) == ERR) {
+				prompt("Mouse input error. Exiting.", "");
+				outro(0);
+			}
 
 			if (myevent.y >= PY(0) && myevent.y <= PY(BDEPTH - 1) &&
 			    myevent.x >= PX(0) && myevent.x <= PX(BWIDTH - 1)) {
@@ -559,6 +574,10 @@ static void drop_probe(int cury, int curx)
 static bool domove(void)
 /* accept a player move */
 {
+	if (exit_requested) {
+		prompt("Signal received. Exiting.", "");
+		outro(exit_requested);
+	}
 	switch (getcoord()) {
 	case '?':
 		help();
