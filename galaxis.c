@@ -14,6 +14,7 @@
 #include <limits.h>
 #include <signal.h>
 #include <stdio.h>
+#include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
 #include <termios.h>
@@ -175,6 +176,18 @@ static void prompt(const char *f, const char *s) {
 	if (s) {
 		(void)addstr(s);
 	}
+	(void)refresh();
+}
+
+static void promptf(const char *fmt, ...) {
+	/* print a formatted message at the prompt line */
+	va_list ap;
+
+	(void)move(PROMPTLINE, 0);
+	(void)clrtoeol();
+	va_start(ap, fmt);
+	(void)vw_printw(stdscr, fmt, ap);
+	va_end(ap);
 	(void)refresh();
 }
 
@@ -654,7 +667,7 @@ static int confirm(void) {
 			}
 		}
 		if (ch == CTRLC) {
-			outro(0);
+			outro(SIGINT);
 		}
 		if (ch == 'N' || ch == 'Y') {
 			(void)addch((chtype)ch);
@@ -673,13 +686,13 @@ char *argv[];
 		initgame();
 		redisplay(TRUE);
 
-		while (boatsfound < LIFEBOATS && !allmarked() && domove()) {
-			continue;
-		}
+	while (boatsfound < LIFEBOATS && !allmarked() && domove()) {
+		continue;
+	}
 
-		redisplay(FALSE); /* force found count to be updated */
-		prompt("Want to play again [yn]? ", "");
-	} while (confirm());
+	redisplay(FALSE); /* force found count to be updated */
+	promptf("Want to play again [yn]? ");
+} while (confirm());
 	outro(0);
 	/*NOTREACHED*/
 }
