@@ -431,8 +431,8 @@ static int getcoord(void) {
 
 			getmouse(&myevent);
 
-			if (myevent.y >= PY(0) && myevent.y <= PY(BDEPTH) &&
-			    myevent.x >= PX(0) && myevent.x <= PX(BWIDTH)) {
+			if (myevent.y >= PY(0) && myevent.y <= PY(BDEPTH - 1) &&
+			    myevent.x >= PX(0) && myevent.x <= PX(BWIDTH - 1)) {
 				nx = PXINV(myevent.x);
 				ny = PYINV(myevent.y);
 				if (myevent.bstate & BUTTON1_DOUBLE_CLICKED) {
@@ -601,7 +601,9 @@ static bool allmarked(void)
 
 	for (i = 0; i < BDEPTH; i++) {
 		for (j = 0; j < BWIDTH; j++) {
-			if (!(board[i][j] || probes[i][j])) {
+			int state = board[i][j];
+
+			if (!(state & (S_MARKED | S_BLANKED | S_PROBED | S_BOATSEEN))) {
 				yes = FALSE;
 			}
 		}
