@@ -11,6 +11,7 @@
 #include <assert.h>
 #include <ctype.h>
 #include <curses.h>
+#include <limits.h>
 #include <signal.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -617,8 +618,12 @@ static int confirm(void) {
 	(void)refresh();
 	for (;;) {
 		ch = getch();
-		if (islower(ch)) {
-			ch = toupper(ch);
+		if (ch >= 0 && ch <= UCHAR_MAX) {
+			unsigned char uch = (unsigned char)ch;
+
+			if (islower(uch)) {
+				ch = toupper(uch);
+			}
 		}
 		if (ch == CTRLC) {
 			outro(0);
