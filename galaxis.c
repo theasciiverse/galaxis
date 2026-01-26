@@ -169,21 +169,13 @@ static void prompt(const char *f, const char *s) {
 	/* print a message at the prompt line */
 	(void)move(PROMPTLINE, 0);
 	(void)clrtoeol();
-	if (s && *s != '\0') {
-		(void)printw(f, s);
-	} else {
-		(void)printw("%s", f);
+	if (f) {
+		(void)addstr(f);
 	}
-	(void)refresh();
-}
-
-static void error(char *s) {
-	(void)move(PROMPTLINE + 2, 0);
-	(void)clrtoeol();
 	if (s) {
 		(void)addstr(s);
-		(void)beep();
 	}
+	(void)refresh();
 }
 
 static int rnd(int n) { return (((rand() & 0x7FFF) % n)); }
@@ -455,10 +447,10 @@ static int getcoord(void) {
 		case KEY_MOUSE: {
 			MEVENT myevent;
 
-			if (getmouse(&myevent) == ERR) {
-				prompt("Mouse input error. Exiting.", "");
-				outro(0);
-			}
+				if (getmouse(&myevent) == ERR) {
+					prompt("Mouse input error. Exiting.", "");
+					outro(1);
+				}
 
 			if (myevent.y >= PY(0) && myevent.y <= PY(BDEPTH - 1) &&
 			    myevent.x >= PX(0) && myevent.x <= PX(BWIDTH - 1)) {
