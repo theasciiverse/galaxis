@@ -100,12 +100,14 @@ static volatile sig_atomic_t exit_requested;
 static void outro(int sig)
 /* end the game, either normally or due to signal */
 {
+	int status = sig ? 1 : 0;
+
 	clear();
 	(void)refresh();
 	(void)resetterm();
 	(void)echo();
 	(void)endwin();
-	exit(0);
+	exit(status);
 }
 
 static void request_exit(int sig)
@@ -163,11 +165,15 @@ static void intro(void)
 }
 
 /* VARARGS1 */
-static void prompt(char *f, char *s) {
+static void prompt(const char *f, const char *s) {
 	/* print a message at the prompt line */
 	(void)move(PROMPTLINE, 0);
 	(void)clrtoeol();
-	(void)printw(f, s);
+	if (s && *s != '\0') {
+		(void)printw(f, s);
+	} else {
+		(void)printw("%s", f);
+	}
 	(void)refresh();
 }
 
@@ -643,6 +649,10 @@ static int confirm(void) {
 
 	(void)refresh();
 	for (;;) {
+		if (exit_requested) {
+			prompt("Signal received. Exiting.", "");
+			outro(exit_requested);
+		}
 		ch = getch();
 		if (ch >= 0 && ch <= UCHAR_MAX) {
 			unsigned char uch = (unsigned char)ch;
