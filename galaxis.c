@@ -128,6 +128,13 @@ static void intro(void)
 	}
 
 	(void)initscr();
+	if (LINES <= PROMPTLINE || COLS < COLWIDTH) {
+		(void)endwin();
+		(void)fprintf(stderr,
+		              "Terminal too small: need at least %d lines and %d columns.\n",
+		              PROMPTLINE + 1, COLWIDTH);
+		exit(1);
+	}
 #ifdef KEY_MIN
 	keypad(stdscr, TRUE);
 #endif /* KEY_MIN */
