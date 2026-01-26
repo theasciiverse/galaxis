@@ -235,7 +235,7 @@ static void showmoves(int cury, int curx) {
 			ny += yincr[n];
 			nx += xincr[n];
 
-			if (!ONBOARD(ny, nx) || board[ny][nx] == S_BOATSEEN) {
+			if (!ONBOARD(ny, nx) || (board[ny][nx] & S_BOATSEEN)) {
 				break;
 			}
 

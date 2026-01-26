@@ -1,5 +1,11 @@
 = galaxis project news =
 
+
+Repository head::
+   Code audit with GPT 5.2.
+   Foukd a minor interface bug doe to incorrect bounds checking.
+   Prevented (theoretical) UB due to unsigned characters).
+
 1.11: 2024-02-08::
    Clean up code to assume SUSv2
    Documentation moved to asciidoctor.
