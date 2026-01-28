@@ -41,7 +41,7 @@ reflow:
 
 CPPCHECKOPTS =
 cppcheck:
-	cppcheck -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
+	@cppcheck --quiet -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
 
 version:
 	@echo $(VERS)
