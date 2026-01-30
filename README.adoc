@@ -8,3 +8,7 @@ any modern Unix.
 Send bug reports to esr@snark.thyrsus.com.  Also, see my WWW home page
 at http://www.catb.org/~esr/index.html for updates and other resources.
 
+This code is commonly packaged as "galaxis".
+
+image:https://repology.org/badge/vertical-allrepos/galaxis.svg[Repology
+package status]

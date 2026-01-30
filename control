@@ -11,6 +11,8 @@ Description: Find the lost lifeboats from an interstellar liner.
 
 Homepage: http://www.catb.org/~esr/galaxis
 
+XBS-Packaged-As: galaxis
+
 XBS-HTML-Target: index.html
 
 XBS-Repository-URL: https://gitlab.com/esr/galaxis
@@ -22,3 +24,5 @@ XBS-Logo: galaxis.png
 #XBS-Project-Tags: game, card, solitaire
 
 XBS-VC-Tag-Template: %(version)s
+
+XBS-Destinations: mailto:george@altlinux.ru, mailto:alfix86@gmail.com, mailto:games@gentoo.org
