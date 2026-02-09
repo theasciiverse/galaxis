@@ -3,15 +3,19 @@
 # SPDX-FileCopyrightText: (C) Eric S. Raymond <esr@thyrsus.com>
 # SPDX-License-Identifier: BSD-2-Clause
 
-VERS=$(shell sed -n <NEWS.adoc '/^[0-9]/s/:.*//p' | head -1)
+PREFIX      ?= /usr/local
+BINDIR      ?= $(PREFIX)/bin
+DATADIR     ?= $(PREFIX)/share
+MANDIR      ?= $(DATADIR)/man
 
 # Flags for use with the Linux ncurses package (recommended)
 CFLAGS = -g -DNDEBUG
 TERMLIB = -lncurses
 CC = gcc
 
-galaxis: galaxis.c
-	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
+VERSION=$(shell sed -n <NEWS.adoc '/^[0-9]/s/:.*//p' | head -1)
+
+# Rules
 
 # Note: to suppress the footers with timestamps being generated in HTML,
 # we use "-a nofooter".
@@ -24,37 +28,59 @@ galaxis: galaxis.c
 .adoc.html:
 	asciidoctor -D. -a nofooter -a webfonts! $<
 
-install: galaxis.6 uninstall
-	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/bin/
-	install -m 755 -o 0 -g 0 galaxis $(ROOT)/usr/bin/galaxis
-	install -m 755 -o 0 -g 0 -d $(ROOT)/usr/share/man/man6/
-	install -m 755 -o 0 -g 0 galaxis.6 $(ROOT)/usr/share/man/man6/galaxis.6
+.PHONY: clean cppcheck spellcheck reflow install uninstall version dist release refresh
 
-uninstall:
-	rm -f ${ROOT}/usr/bin/galaxis ${ROOT}/usr/share/man/man6/galaxis.6
+# Build
+
+galaxis: galaxis.c
+	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
 
 clean:
 	rm -f galaxis galaxis.6 galaxis-*.tar.gz *~ *.html
+
+# Validate
 
 reflow:
 	@clang-format --style="{IndentWidth: 8, UseTab: ForIndentation}" -i $$(find . -name "*.[ch]")
 
 CPPCHECKOPTS =
 cppcheck:
-	@cppcheck --quiet -DREVISION=$(VERS) $(CPPCHECKOPTS) galaxis.c
+	@cppcheck --quiet -DREVISION=$(VERSION) $(CPPCHECKOPTS) galaxis.c
+
+spellcheck:
+	@spellcheck galaxis.adoc
+
+# Install/uninstall
+
+install:
+	install -d $(DESTDIR)$(BINDIR)
+	install -m 755 galaxis $(DESTDIR)$(BINDIR)/galaxis
+	install galaxis.1 $(DESTDIR)$(MANDIR)/man1/galaxis.6
+
+uninstall:
+	rm -f $(DESTDIR)$(BINDIR)/galaxis
+	rm -f $(DESTDIR)$(MANDIR)/man1/galaxis.6
+
+# Export
 
 version:
-	@echo $(VERS)
+	@echo $(VERSION)
 
 SOURCES = README.adoc COPYING NEWS.adoc control galaxis.c Makefile galaxis.adoc galaxis.desktop galaxis.png
 
-galaxis-$(VERS).tar.gz: $(SOURCES) galaxis.6
-	tar --transform='s:^:galaxis-$(VERS)/:' --show-transformed-names -cvzf galaxis-$(VERS).tar.gz $(SOURCES) galaxis.6
+galaxis-$(VERSION).tar.gz: $(SOURCES)
+	mkdir galaxis-$(VERSION)
+	cp -r $(SOURCES) galaxis-$(VERSION)
+	tar -czf galaxis-$(VERSION).tar.gz galaxis-$(VERSION)
+	rm -fr galaxis-$(VERSION)
+	ls -l galaxis-$(VERSION).tar.gz
 
-dist: galaxis-$(VERS).tar.gz
+dist: galaxis-$(VERSION).tar.gz
 
-release: galaxis-$(VERS).tar.gz galaxis.html
-	shipper version=$(VERS) | sh -e -x
+release: galaxis-$(VERSION).tar.gz galaxis.html
+	shipper version=$(VERSION) | sh -e -x
 
 refresh: galaxis.html
-	shipper -N -w version=$(VERS) | sh -e -x
+	shipper -N -w version=$(VERSION) | sh -e -x
+
+# end
