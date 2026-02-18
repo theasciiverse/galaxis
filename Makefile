@@ -9,7 +9,7 @@ DATADIR     ?= $(PREFIX)/share
 MANDIR      ?= $(DATADIR)/man
 
 # Flags for use with the Linux ncurses package (recommended)
-CFLAGS = -g -DNDEBUG
+CFLAGS += -O -Wall -Werror
 TERMLIB = -lncurses
 CC = gcc
 
@@ -31,6 +31,8 @@ VERSION=$(shell sed -n <NEWS.adoc '/^[0-9]/s/:.*//p' | head -1)
 .PHONY: clean cppcheck spellcheck reflow install uninstall version dist release refresh
 
 # Build
+
+build: galaxis galaxis.6
 
 galaxis: galaxis.c
 	$(CC) $(CFLAGS) -o galaxis galaxis.c $(TERMLIB)
