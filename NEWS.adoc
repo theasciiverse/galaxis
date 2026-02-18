@@ -1,9 +1,9 @@
 = galaxis project news =
 
 
-Repository head::
+1.12: 2026-02-18::
    Code audit with GPT 5.2.
-   Foukd a minor interface bug doe to incorrect bounds checking.
+   Found a minor interface bug due to incorrect bounds checking.
    Prevented (theoretical) UB due to unsigned characters).
    Exit gracefully when terminal emulator window is too small.
 
