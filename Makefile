@@ -9,7 +9,7 @@ DATADIR     ?= $(PREFIX)/share
 MANDIR      ?= $(DATADIR)/man
 
 # Flags for use with the Linux ncurses package (recommended)
-CFLAGS += -O -Wall -Werror
+CFLAGS += -O -Wall -Werror -Wextra -Wno-unused-parameter
 TERMLIB = -lncurses
 CC = gcc
 
@@ -28,7 +28,8 @@ VERSION=$(shell sed -n <NEWS.adoc '/^[0-9]/s/:.*//p' | head -1)
 .adoc.html:
 	asciidoctor -D. -a nofooter -a webfonts! $<
 
-.PHONY: clean cppcheck spellcheck reflow install uninstall version dist release refresh
+.PHONY: build clean cppcheck spellcheck reflow
+.PHONY: install uninstall version dist release refresh
 
 # Build
 
