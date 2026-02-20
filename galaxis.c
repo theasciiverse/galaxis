@@ -677,10 +677,7 @@ static int confirm(void) {
 	}
 }
 
-int main(argc, argv)
-int argc;
-char *argv[];
-{
+int main(int argc, char *argv[]) {
 	intro();
 	do {
 		initgame();
