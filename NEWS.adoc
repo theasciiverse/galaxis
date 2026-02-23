@@ -1,5 +1,7 @@
 = galaxis project news =
 
+1.13: 2026-02-22::
+   Fix an surviving K&R style header so we play nice with GCC 15.
 
 1.12: 2026-02-18::
    Code audit with GPT 5.2.
