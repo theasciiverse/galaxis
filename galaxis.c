@@ -476,8 +476,9 @@ static int getcoord(void) {
 			MEVENT myevent;
 
 				if (getmouse(&myevent) == ERR) {
-					prompt("Mouse input error. Exiting.", "");
-					outro(1);
+					/* an event outside the mouse mask, such as
+					 * the right button or the wheel */
+					continue;
 				}
 
 			if (myevent.y >= PY(0) && myevent.y <= PY(BDEPTH - 1) &&
