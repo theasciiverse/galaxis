@@ -86,6 +86,7 @@ static int av_getmouse(MEVENT *event) {
 	}
 	return r;
 }
+#undef getmouse
 #define getmouse(e) av_getmouse(e)
 #endif
 

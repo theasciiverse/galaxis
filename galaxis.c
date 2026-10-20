@@ -17,7 +17,9 @@
 #include <stdarg.h>
 #include <stdlib.h>
 #include <string.h>
+#ifndef _WIN32
 #include <termios.h>
+#endif
 #include <time.h>
 #include <unistd.h>
 #ifdef AV_CENTRE
@@ -129,9 +131,11 @@ static void intro(void)
 #ifdef SIGIOT
 	(void)signal(SIGIOT, request_exit); /* for assert(3) */
 #endif                               /* SIGIOT */
+#ifdef SIGQUIT
 	if (signal(SIGQUIT, SIG_IGN) != SIG_IGN) {
 		(void)signal(SIGQUIT, request_exit);
 	}
+#endif /* SIGQUIT */
 
 	(void)initscr();
 	if (LINES <= PROMPTLINE || COLS < COLWIDTH) {
@@ -305,7 +309,12 @@ static void redisplay(bool force) {
 		(void)mvaddstr(SYBASE + 5, SXBASE, "Arrow keys work.");
 #endif /* A_UNDERLINE */
 #ifdef NCURSES_MOUSE_VERSION
+#ifdef PDCURSES
+		/* no terminfo; the Windows console has a mouse */
+		char *km = "";
+#else
 		char *km = tigetstr("kmous");
+#endif
 
 		if (km != NULL && km != (char *)-1) {
 			(void)mvaddstr(SYBASE + 6, PX(0),
