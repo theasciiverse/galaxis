@@ -31,6 +31,9 @@ static void av_centre_start(void) {
 	if (av_pad) {
 		keypad(av_pad, TRUE);
 		keypad(stdscr, TRUE); /* keys are read on the screen */
+		/* nothing to show there: else the first getch() would
+		 * refresh it, blank, over the pad */
+		untouchwin(stdscr);
 	}
 }
 
