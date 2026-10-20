@@ -305,7 +305,7 @@ static void redisplay(bool force) {
 		(void)mvaddstr(SYBASE + 5, SXBASE, "Arrow keys work.");
 #endif /* A_UNDERLINE */
 #ifdef NCURSES_MOUSE_VERSION
-		char *km = tigetstr("Km");
+		char *km = tigetstr("kmous");
 
 		if (km != NULL && km != (char *)-1) {
 			(void)mvaddstr(SYBASE + 6, PX(0),
