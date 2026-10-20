@@ -20,6 +20,9 @@
 #include <termios.h>
 #include <time.h>
 #include <unistd.h>
+#ifdef AV_CENTRE
+#include "centre.h"
+#endif
 
 /* miscellaneous constants */
 #define CTRLC '\003' /* used as terminate command */
@@ -138,6 +141,9 @@ static void intro(void)
 		              PROMPTLINE + 1, COLWIDTH);
 		exit(1);
 	}
+#ifdef AV_CENTRE
+	av_centre_start();
+#endif
 #ifdef KEY_MIN
 	keypad(stdscr, TRUE);
 #endif /* KEY_MIN */

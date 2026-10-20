@@ -1,1 +1,6 @@
 galaxis
+galaxis
+*.exe
+build/
+/stage/
+/dist/
