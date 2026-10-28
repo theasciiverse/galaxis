@@ -11,9 +11,6 @@ av install galaxis
 av play galaxis
 ```
 
-Or download the archive for your system from this repository's Releases,
-unpack it and run `./galaxis` (`galaxis.exe` on Windows).
-
 ## Credits
 
 Eric S. Raymond's curses clone of Christian Franz's Macintosh freeware game,
